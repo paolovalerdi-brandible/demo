@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test page</title>
+</head>
+<!-- <script type="text/javascript" src="https://widget.gleamjs.io/e.js" async="true"></script> -->
+<body>
+    <h1>Test page</h1>
+    <p id="content">
+    </p>
+    <button type="button" id="mybtn">Validate entry</button>
+        <!-- <a class="e-widget no-button generic-loader" href="https://gleam.io/D0bZ6/test" rel="nofollow">
+            Test
+        </a> -->
+</body>
+<script>
+
+    (function (d, t) {
+        const params = new URLSearchParams(window.location.search);
+        const gleamId = params.get("geid")
+        var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+        g.src = `https://widget.gleamjs.io/${gleamId}/trk.js`;
+        s.parentNode.insertBefore(g, s);
+    }(document, "script"));
+
+</script>
+<script>
+    function getUrlParams() {
+        const params = new URLSearchParams(window.location.search);
+
+
+        const gleamId = params.get("geid")
+        const actionId = params.get("gaid")
+        const actionValue = params.get("gav")
+
+        try {
+            window.Gleam = window.Gleam;
+            Gleam.push([actionId, actionValue]);
+            console.log("tracked", gleamId, actionId, actionValue)
+        } catch(e) {
+            console.log(e)
+        }   
+
+        let paramText = '';
+        params.forEach((value, key) => {
+            paramText += `${key}: ${value}     `;
+        });
+
+        return paramText || 'No parameters found.';
+    }
+
+    setTimeout(() => {
+        document.getElementById("content").textContent = getUrlParams();
+    }, 2000)
+
+    document.getElementById("mybtn").addEventListener("click", getUrlParams, false);
+
+    
+</script>
+
+<!-- <script>
+    
+</script> -->
+
+</html>
