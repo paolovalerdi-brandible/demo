@@ -6,28 +6,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sweepstake</title>
     <style>
-        html, body {
-            height: 100%;
+        * {
             margin: 0;
+            padding: 0;
+            border: none;
         }
-    
+
+        html,
+        iframe,
         body {
-            background-image: url('background.png');
+            font-family: Arial, sans-serif;
+            color: white;
+            width: 100%;
+            height: 100%;
+            background: url('background.png') no-repeat center center fixed;
             background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-attachment: fixed;
+        }
+
+        html {
+            overflow: auto
+        }
+
+        @media screen and (-webkit-min-device-pixel-ratio:0) {
+
+            html,
+            iframe,
+            body {
+                min-height: 100%;
+            }
+        }
+
+        .overlay-text {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px 40px;
+            border-radius: 10px;
+            margin: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
     </style>
 </head>
 <script type="text/javascript" src="https://widget.gleamjs.io/e.js" async="true"></script>
-<!-- <body>
-    <h1>Test page</h1>
-    <p id="content">
-    </p>
-    <button type="button" id="mybtn">Validate entry</button> -->
-       <a class="e-widget no-button generic-loader" href="https://gleam.io/jkcSQ/integration-test" rel="nofollow">
-  Integration Test
+<div class="overlay-text">
+    <h1>Sweepstake</h1>
+    <p>Keep playing to keep earning entries!</p>
+</div>
+<a class="e-widget no-button generic-loader" style="max-width: 100%;" href="https://gleam.io/jkcSQ/integration-test"
+    rel="nofollow">
 </a>
 </body>
 <script>
@@ -54,9 +80,9 @@
             window.Gleam = window.Gleam;
             Gleam.push([actionId, actionValue]);
             console.log("tracked", gleamId, actionId, actionValue)
-        } catch(e) {
+        } catch (e) {
             console.log(e)
-        }   
+        }
 
         let paramText = '';
         params.forEach((value, key) => {
@@ -72,7 +98,7 @@
 
     document.getElementById("mybtn").addEventListener("click", getUrlParams, false);
 
-    
+
 </script>
 
 <!-- <script>
