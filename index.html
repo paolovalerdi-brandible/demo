@@ -2,91 +2,75 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sweepstake</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: url('background.png') no-repeat center center fixed;
-      background-size: cover;
-      font-family: Arial, sans-serif;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-    }
-
-    .overlay-text {
-      background-color: rgba(0, 0, 0, 0.5);
-      padding: 20px 40px;
-      border-radius: 10px;
-    }
-
-    h1 {
-      font-size: 3rem;
-      margin: 0;
-    }
-
-    p {
-      font-size: 1.2rem;
-      margin-top: 10px;
-    }
-
-    .gleam-widget {
-      margin-top: 30px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweepstake</title>
+    <style>
+        body {
+            background-image: url('background.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    </style>
 </head>
-
-<body>
-  <div class="overlay-text">
-    <h1>Sweepstake</h1>
-    <p>Keep playing to keep earning entries!</p>
-  </div>
-
-<a class="e-widget no-button generic-loader" href="https://gleam.io/jkcSQ/integration-test" rel="nofollow">
+<script type="text/javascript" src="https://widget.gleamjs.io/e.js" async="true"></script>
+<!-- <body>
+    <h1>Test page</h1>
+    <p id="content">
+    </p>
+    <button type="button" id="mybtn">Validate entry</button> -->
+       <a class="e-widget no-button generic-loader" href="https://gleam.io/jkcSQ/integration-test" rel="nofollow">
   Integration Test
 </a>
-<script type="text/javascript" src="https://widget.gleamjs.io/e.js" async="true"></script>
+</body>
+<script>
 
-  <script>
     (function (d, t) {
-      const params = new URLSearchParams(window.location.search);
-      const gleamId = params.get("geid");
-      const gleamLink = params.get("link");
-      const actionId = params.get("gaid");
-      const actionValue = params.get("gav");
-
-      // if (gleamLink) {
-      //   const linkEl = document.getElementById("gleam-link");
-      //   if (linkEl) {
-      //     linkEl.href = gleamLink;
-      //   }
-      // }
-
-      if (gleamId) {
+        const params = new URLSearchParams(window.location.search);
+        const gleamId = params.get("geid")
         var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
         g.src = `https://widget.gleamjs.io/${gleamId}/trk.js`;
         s.parentNode.insertBefore(g, s);
-      }
+    }(document, "script"));
 
-      
-      try {
-        window.Gleam = window.Gleam;
-        if (actionId && actionValue) {
-          Gleam.push([actionId, actionValue]);
-          console.log("tracked", gleamId, actionId, actionValue);
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    })(document, "script");
-  </script>
-</body>
+</script>
+<script>
+    function getUrlParams() {
+        const params = new URLSearchParams(window.location.search);
+
+
+        const gleamId = params.get("geid")
+        const actionId = params.get("gaid")
+        const actionValue = params.get("gav")
+
+        try {
+            window.Gleam = window.Gleam;
+            Gleam.push([actionId, actionValue]);
+            console.log("tracked", gleamId, actionId, actionValue)
+        } catch(e) {
+            console.log(e)
+        }   
+
+        let paramText = '';
+        params.forEach((value, key) => {
+            paramText += `${key}: ${value}     `;
+        });
+
+        return paramText || 'No parameters found.';
+    }
+
+    setTimeout(() => {
+        document.getElementById("content").textContent = getUrlParams();
+    }, 2000)
+
+    document.getElementById("mybtn").addEventListener("click", getUrlParams, false);
+
+    
+</script>
+
+<!-- <script>
+    
+</script> -->
 
 </html>
